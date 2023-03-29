@@ -5,9 +5,10 @@
   "main": "index.js",
   "engines": {
     "node": "18"
-  }, 
+  },
   "scripts": {
     "dev": "tsx src/server.ts",
+    "devs": "nodemon",
     "build": "tsup src",
     "start": "node dist/server.js"
   },
@@ -15,8 +16,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.17",
     "@types/node": "^18.15.11",
+    "nodemon": "^2.0.22",
     "prisma": "^4.12.0",
     "ts-node": "^10.9.1",
     "tsup": "^6.7.0",
@@ -25,6 +28,8 @@
   },
   "dependencies": {
     "@prisma/client": "^4.12.0",
-    "express": "^4.18.2"
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "reflect-metadata": "^0.1.13"
   }
 }
