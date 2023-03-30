@@ -6,3 +6,116 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id         Int      @id @default(autoincrement())
+  is_adm     Boolean  @default(false)
+  name       String   @db.VarChar(200)
+  surname    String   @db.VarChar(200)
+  email      String   @db.VarChar(255)
+  username   String   @db.VarChar(80)
+  password   String   @db.VarChar(255)
+  created_At DateTime @default(now())
+
+  @@map("user")
+}
+
+model Player {
+  id            Int     @id @default(autoincrement())
+  name          String  @db.VarChar(180)
+  sex           String  @db.Char(1)
+  city          String  @db.VarChar(80)
+  self_photo_p  Bytes
+  position_p    String  @db.Char(1)
+  is_goalkeeper Boolean
+  is_in_game    Boolean
+
+  @@map("player")
+}
+
+model StatisticPlayer {
+  id           Int @id @default(autoincrement())
+  total_gs     Int @db.Integer
+  total_gc     Int @db.Integer
+  dribble      Int @db.Integer
+  def          Int @db.Integer
+  num_wins     Int @db.Integer
+  num_loss     Int @db.Integer
+  total_games  Int @db.Integer
+  total_card_y Int @db.Integer
+  total_card_r Int @db.Integer
+
+  @@map("statistic_player")
+}
+
+model TeamX1 {
+  id          Int    @id @default(autoincrement())
+  team_name   String @db.VarChar(80)
+  total_games Int    @db.Integer
+  total_wins  Int    @db.Integer
+  total_loss  Int    @db.Integer
+  total_gs    Int    @db.Integer
+  total_gc    Int    @db.Integer
+  photo_team  Bytes
+
+  @@map("team_x1")
+}
+
+model TeamX2 {
+  id          Int    @id @default(autoincrement())
+  team_name   String @db.VarChar(80)
+  total_games Int    @db.Integer
+  total_wins  Int    @db.Integer
+  total_loss  Int    @db.Integer
+  total_gs    Int    @db.Integer
+  total_gc    Int    @db.Integer
+  photo_team  Bytes
+
+  @@map("team_x2")
+}
+
+model Game {
+  id Int @id @default(autoincrement())
+
+  @@map("game")
+}
+
+model StatisticGame {
+  id Int @id @default(autoincrement())
+  pass_ball_t_h Decimal
+  total_card_t_h Int
+  total_card_t_v Int
+  gols_time_h Int
+  gols_time_v Int
+
+  @@map("statistic_game")
+}
+
+model GameLocation {
+  id         Int    @id @default(autoincrement())
+  city       String @db.VarChar(50)
+  desc_local String @db.VarChar(50)
+  address    String @db.VarChar(50)
+  log        String @db.VarChar(40)
+  lat        String @db.VarChar(40)
+
+  @@map("game_location")
+}
+
+model GolsInGame {
+  id           Int     @id @default(autoincrement())
+  is_fist_time Boolean
+  is_gol_t_h   Boolean
+  is_gol_t_v   Boolean
+  time_g       String  @db.VarChar(2)
+
+  @@map("gols_in_game")
+}
+
+model CardGame {
+  id     Int     @id @default(autoincrement())
+  card_r Boolean
+  card_y Boolean
+
+  @@map("card_game")
+}
